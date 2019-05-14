@@ -19,7 +19,15 @@ package com.wegtam.scala.intro
 
 /**
   * Implicits offer several very powerful features albeit can slow down
-  * the compiler considerably.
+  * the compiler considerably (consider searching implicit lookup in scala
+  * on the net).
+  *
+  * Consider placing often used implicits in the companion object of datatypes
+  * or into "wrappers" which can be imported.
+  *
+  * The compiler will search in the local scope, then in the imports, starting
+  * with the local ones. Afterwards it will look into files from the same
+  * package.
   */
 object implicits {
 
