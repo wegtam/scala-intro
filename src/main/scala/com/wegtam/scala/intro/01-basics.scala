@@ -229,4 +229,40 @@ object basics {
       case _           => "..." // The `_` is a "match all" case.
     }
   }
+
+  /**
+    * Case classes are a good way to reduce boilerplate and are good supported
+    * in pattern matching.
+    */
+  object caseclasses {
+    final case class Person(firstname: String, surname: String, phone: String)
+    // The above definition is equivalent and even more to the java one below:
+    /*
+    class Person {
+      private String firstname = "";
+      private String surname = "";
+      private String phone = "";
+
+      public Person(String fn,
+        String sn,
+        String ph) {
+          this.firstname = fn;
+          this.surname = fn;
+          this.phone = ph;
+        }
+
+        public String getFirstname() {
+          return firstname;
+        }
+
+        public String getSurname() {
+          return surname;
+        }
+
+        public String getPhone() {
+          return phone;
+        }
+    }
+   */
+  }
 }
