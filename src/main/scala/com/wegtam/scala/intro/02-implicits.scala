@@ -17,4 +17,65 @@
 
 package com.wegtam.scala.intro
 
-object implicits {}
+/**
+  * Implicits offer several very powerful features albeit can slow down
+  * the compiler considerably.
+  */
+object implicits {
+
+  /**
+    * Passing every parameter explicitely becomes tedious especially
+    * when some are always the same (e.g. currying).
+    *
+    * NOTE:
+    *   - always specify the type of implicit val or def
+    *   - try not to use implicits for simple datatypes (primitives)
+    *   - the compiler will yell at you if multiple implicits of the same type
+    *     are in scope
+    */
+  object params {
+    def increment(n: Int)(implicit incBy: Int): Int = n + incBy
+
+    val a               = increment(3)(4)
+    implicit val i: Int = 10
+    // Overriding is always possible
+    val b = increment(3)(4)
+    // Otherwise the implicit is chosen.
+    val c = increment(3)
+  }
+
+  /**
+    * Implicit conversions should generally not be used because the create more
+    * trouble than solving.
+    */
+  object conversions {
+    // Enable the feature
+    import scala.language.implicitConversions
+
+    implicit def intToStr(i: Int): String = i.toString
+
+    def concat(a: String, b: String): String = a + b
+
+    val _ = concat("a", 1) // Compiles because of the implicit def above.
+  }
+
+  /**
+    * Implicits can be used to extend datatypes with functions.
+    *
+    * In some languages this is called monkey patching. ;-)
+    *
+    * NOTE:
+    *   - always put such wrappers into an object called `syntax` or `implicits`
+    *     which enables the functions by an import (`import syntax._`)
+    *   - stick to the naming conventions by appending `Ops` e.g. `DataTypeNameOps`
+    */
+  object extensions {
+    // If possible extend `AnyVal` when doing this.
+    implicit final class IntOps(val i: Int) extends AnyVal {
+      def succ: Int = i + 1
+    }
+
+    val a: Int = 1
+    val _      = a.succ
+  }
+}
