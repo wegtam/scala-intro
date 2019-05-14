@@ -1,3 +1,7 @@
+### Bloop
+.bloop/
+### Metals
+.metals/
 ### Scala / SBT
 dist/*
 target/
