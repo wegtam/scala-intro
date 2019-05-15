@@ -1,6 +1,7 @@
-\documentclass{beamer}
-\usepackage[utf8]{inputenc}
+\documentclass[10pt]{beamer}
 \usetheme{metropolis}
+\usepackage[utf8]{inputenc}
+\usepackage{booktabs}
 \title{Scala Introduction}
 \date{\today}
 \author{Jens Grassel}
@@ -8,24 +9,99 @@
 \begin{document}
   \maketitle
 
-  \section{Section 1}
-  \begin{frame}{Frame Title}
-    Some text
-  \end{frame}
-
-  \begin{frame}{Another frame}
-    Whatever
-    \begin{alertblock}{Box title}
-      Yep...
-    \end{alertblock}
-  \end{frame}
-
-  \section{Section 2}
-  \begin{frame}{Yet another frame title}
+  \section{Environment and Tooling}
+  \begin{frame}{Java Virtual Machine}
+    Scala runs on the JVM, but not only there!
     \begin{itemize}
-      \item foo
-      \item bar
-      \item and so on...
+      \item Scala.js for Javascript endpoints
+      \item Scala Native for LLVM endpoints
     \end{itemize}
+  \end{frame}
+
+  \begin{frame}{Build Tools}
+    \begin{itemize}
+      \item multiple build tools are available
+	\begin{itemize}
+	  \item SBT
+	  \item Mill
+	  \item CBT
+	  \item Fury
+	\end{itemize}
+      \item SBT has the biggest ecosystem and is widely used
+      \item stick to SBT but maybe checkout Mill ;-)
+    \end{itemize}
+  \end{frame}
+
+  \begin{frame}{SBT Setup}
+    SBT is usually setup on a per project basis via the \texttt{build.sbt} file.
+    However here are some nice settings for the global configuration, put it 
+    into \texttt{\~{}/.sbt/1.0/global.sbt}\\
+    \begin{texttt}
+      \\
+      // Prevent Strg+C from killing sbt.\\
+      cancelable in Global := true\\
+      // Coloured console.\\
+      initialize \~{}= (\_ $\Rightarrow$\\
+      ~~if (ConsoleLogger.formatEnabled)\\
+      ~~~~sys.props("scala.color") = "true"\\
+      )
+    \end{texttt}
+  \end{frame}
+
+  \begin{frame}{SBT Plugins}
+    Some useful global plugins can be enabled by adding them to the file
+    \texttt{\~{}/.sbt/1.0/plugins/plugins.sbt}\\
+    \begin{texttt}
+      \\
+      addSbtPlugin("net.virtual-void" \% "sbt-dependency-graph" \% "0.9.2")\\
+      addSbtPlugin("com.timushev.sbt" \% "sbt-updates"          \% "0.4.0")
+    \end{texttt}
+  \end{frame}
+
+  \begin{frame}{Development Environment}
+    There are several options available but beginners should maybe stick
+    to a full blown IDE which in the case of Scala means IntelliJ IDEA
+    with the Scala plugin.\\
+    For the confident:
+    \begin{itemize}
+      \item VS-Code with scala-metals
+      \item Vim or Neovim with vim-scala plugin and optionally scala-metals
+      \item Emacs
+      \item Atom
+      \item possibly others\ldots
+    \end{itemize}
+  \end{frame}
+
+  \section{Basics}
+  \begin{frame}{Values}
+    \begin{table}
+      \caption{Values types in Scala}
+      \begin{tabular}{@{} ll @{}}
+	\toprule
+	Type & Notes\\
+	\midrule
+	Immutable & Data structures which cannot be changed.\\
+	Mutable & Data structures which can be changed.\\
+	Val & A variable that cannot be re-assigned.\\
+	Var & A variable that can be re-assigned (changed).\\
+	\bottomrule
+      \end{tabular}
+    \end{table}
+  \end{frame}
+
+  \begin{frame}{Values II}
+    \begin{table}
+      \caption{When to use which type?}
+      \begin{tabular}{@{} ll @{}}
+	\toprule
+	Definition & Notes\\
+	\midrule
+	Immutable Val & The recommended way to go.\\
+	Immutable Var & Okay if used in a local scope.\\
+	Mutable Val & A Try not to use this but there may be applications.\footnote{However \textbf{if} you do this then \textbf{never} pass the value around!}\\
+	Mutable Var & \alert{Never ever do this!}\\
+	\bottomrule
+      \end{tabular}
+    \end{table}
   \end{frame}
 \end{document}
