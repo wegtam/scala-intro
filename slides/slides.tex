@@ -2,6 +2,7 @@
 \usetheme{metropolis}
 \usepackage[utf8]{inputenc}
 \usepackage{booktabs}
+\usepackage{lmodern}
 \title{Scala Introduction}
 \date{\today}
 \author{Jens Grassel}
@@ -98,10 +99,66 @@
 	\midrule
 	Immutable Val & The recommended way to go.\\
 	Immutable Var & Okay if used in a local scope.\\
-	Mutable Val & A Try not to use this but there may be applications.\footnote{However \textbf{if} you do this then \textbf{never} pass the value around!}\\
+	Mutable Val & Try not to use this but there may be applications.\footnote{However \textbf{if} you do this then \textbf{never} pass the value around!}\\
 	Mutable Var & \alert{Never ever do this!}\\
 	\bottomrule
       \end{tabular}
     \end{table}
+  \end{frame}
+
+  \begin{frame}{Recursion}
+    As Scala provides tail recursion you should try to use it if possible.
+    \begin{alertblock}{But\ldots}
+      Please not simply for the sake of using it!\\
+      Evaluate if it is necessary.\footnote{Some algorithm are hard or impossible to do with tail recursion!}
+    \end{alertblock}
+    \metroset{block=fill}
+    \begin{block}{Remember}
+      Readability and maintainability trump obscure performance gains every time!
+    \end{block}
+  \end{frame}
+
+  \begin{frame}{Functions}
+    Functions are there to make your life easier!
+    \begin{itemize}
+      \item Use HOF\footnote{Higher Order Functions}
+      \item Use Currying
+      \item Use polymorphism
+    \end{itemize}
+    For additional benefit try to stick with \textbf{pure} functions.
+    A pure function:
+    \begin{itemize}
+      \item is total (an output for every input)
+      \item is free of side effects
+      \item its output does only depend on its input
+    \end{itemize}
+  \end{frame}
+
+  \section{Implicits}
+  \begin{frame}{What are implicits?}
+    An \textbf{implicit} value can be used by the compiler to pass it to any
+    function which depends on an implicit parameter of the same type.
+  \end{frame}
+
+  \begin{frame}{Use cases}
+    \begin{itemize}
+      \item reduce boiler plate (implicit parameters)
+      \item extend existing types with custom functions (wrapper classes)
+      \item convert types implicitly (\alert{Do not do this!})
+    \end{itemize}
+  \end{frame}
+
+  \begin{frame}{Best practices}
+    \begin{itemize}
+      \item always specify the type of implicit \texttt{val} or \texttt{def}
+      \item do not to use implicits for simple datatypes (primitives)
+      \item stick to the naming conventions e.g. \texttt{FooOps} when extending \texttt{Foo}
+      \item put extension wrappers into \texttt{syntax} objects
+      \item \alert{Do not use implicit conversions!}
+    \end{itemize}
+  \end{frame}
+
+  \section{Objects, Classes and Traits}
+  \begin{frame}{Objects}
   \end{frame}
 \end{document}
