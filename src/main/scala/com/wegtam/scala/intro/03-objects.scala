@@ -42,4 +42,28 @@ object objects {
 
   }
 
+  /**
+    * Objects can extend a class and one or more traits.
+    *
+    * NOTE:
+    *   - Refrain from mixing in a lot of traits it _will_ lead to trouble (see Cake Pattern).
+    */
+  object Mixins {
+
+    trait Bar {
+      def bar: String = "bar"
+    }
+
+    trait Foo {
+      def foo: String = "foo"
+    }
+
+    class FooBar {
+      def foobar: String = "foobar"
+    }
+
+    object AnotherModule extends FooBar with Bar with Foo {
+      def fancy: String = foobar
+    }
+  }
 }

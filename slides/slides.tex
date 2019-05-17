@@ -160,6 +160,16 @@
 
   \section{Objects, Classes and Traits}
   \begin{frame}{Objects}
+    \begin{itemize}
+      \item the most simple container format in Scala
+      \item basically singletons (in Java world)
+      \item no constructor and \textbf{no type parameters}\footnote{This will be become important later.}
+      \item can extend one class and one or more traits
+      \item start out with objects and \textit{upgrade} later if needed
+    \end{itemize}
+    \begin{alertblock}{About mixing in traits...}
+      Try to avoid mixing in a lot of traits into your objects. See the infamous \textit{Cake Pattern} which will lead to tight coupling and other issues.
+    \end{alertblock}
   \end{frame}
 
   \begin{frame}{Classes}
