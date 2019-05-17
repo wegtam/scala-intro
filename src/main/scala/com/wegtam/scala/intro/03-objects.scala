@@ -40,6 +40,12 @@ object objects {
       */
     def min(ns: Seq[Int]): Int = ???
 
+    /**
+    * TODO Implement a better version of the `min` function.
+    *
+    * @param ???
+    * @return ???
+    */
   }
 
   /**
