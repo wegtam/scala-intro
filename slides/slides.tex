@@ -212,11 +212,42 @@
 
   \section{Useful libraries for functional programming}
   \begin{frame}{Cats}
+    Cats provides a core library and additional modules for functional programming in Scala.
+    \begin{itemize}
+      \item Documentation at the website: https://typelevel.org/cats/
+      \item Book "Scala with Cats" (Noel Welsh and Dave Gurnell)
+      \item several sub modules
+	\begin{itemize}
+	  \item Cats-Effect (IO Monad for Scala)
+	  \item Cats Tagless (A library of utilities for tagless final algebras)
+	  \item Kittens (Automatic type class derivation)
+	  \item a lot of others...
+	\end{itemize}
+    \end{itemize}
   \end{frame}
 
   \begin{frame}{Refined}
+    Refined types allow you to add more constraints to types.
+    \begin{exampleblock}{Example}
+      \texttt{type NES = String Refined NonEmpty}\\
+      \texttt{val password: NES = ???}
+    \end{exampleblock}
+    \begin{itemize}
+      \item Documentation at the website: https://github.com/fthomas/refined
+      \item integration with Cats
+      \item integration with ScalaCheck
+      \item can add significant compile time overhead
+    \end{itemize}
   \end{frame}
 
   \begin{frame}{ScalaCheck}
+    ScalaCheck brings property based testing to Scala.
+    \begin{itemize}
+      \item Documentation at the website: http://www.scalacheck.org/
+      \item integration with ScalaTest
+    \end{itemize}
+    \begin{alertblock}{Note}
+      Even when (mis)used for generators\footnote{Generators provide instances for datatypes as input for testing.} only it brings significant improvements for testing.
+    \end{alertblock}
   \end{frame}
 \end{document}
